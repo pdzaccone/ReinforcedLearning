@@ -1,7 +1,3 @@
-from Functions import ActionValueFunction
-from Misc import ValueNumPair
-
-
 class EpisodeObserver:
     """
     This class stores episode states and rewards and optimizes the policy
@@ -21,7 +17,9 @@ class EpisodeObserver:
             for state in self.returns.keys():
                 self.returns[state] = (self.returns[state][0], self.totalReward - self.returns[state][1] + 1)
                 action = self.returns[state][0]
-                avFunction.updateStateActionPair(self.episodeNum, state, action, ValueNumPair(self.returns[state][1], 1))
+                avFunction.updateStateActionPair(state, action, self.returns[state][1])
+                # avFunction.updateStateActionPair(self.episodeNum, state, action, ValueNumPair(self.returns[state][1], 1))
+            avFunction.finalizeStateUpdate()
         return avFunction
 
     def reset(self):

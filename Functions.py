@@ -1,4 +1,4 @@
-from Misc import State
+from Misc import State, ActionSorter_TopReturn
 
 
 class ActionValueFunction:
@@ -31,6 +31,44 @@ class ActionValueFunction:
             if self.allStateData[key].getNumberOfActions() >= numberOfActions:
                 retval += 1
         return retval
+
+    def clear(self):
+        self.allStateData.clear()
+
+class ActionValueFunction_WithMemory:
+    def __init__(self):
+        self.allStateData = {}
+
+    def updateStateActionPair(self, state, action, returnVal):
+        if state not in self.allStateData:
+            actions = ActionSorter_TopReturn()
+            actions.update(action, returnVal)
+            self.allStateData[state] = actions
+        else:
+            self.allStateData[state].update(action, returnVal)
+
+    def finalizeStateUpdate(self):
+        for state in self.allStateData:
+            self.allStateData[state].updateBestActions()
+
+    def getImprovedPolicy(self):
+        return self.allStateData
+
+    def getTotalNumberOfKnownStates(self, numberOfActions):
+        retval = 0
+        for state in self.allStateData:
+            if self.allStateData[state].getNumberOfActions() >= numberOfActions:
+                retval += 1
+        return retval
+
+    # def isNewState(self, stateToCheck):
+    #     if self.allStateData.__len__() == 0:
+    #         return True
+    #     else:
+    #         for state in self.allStateData.keys():
+    #             if state == stateToCheck:
+    #                 return False
+    #         return True
 
     def clear(self):
         self.allStateData.clear()

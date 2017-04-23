@@ -1,7 +1,7 @@
 import gym
 
 from Converters import StateConverterBase, StateConverterInf
-from Policy import Policy_Base
+from Policy import Policy_Base, Policy_WithMemory
 from EnvironmentDataSet import EnvironmentDataSet
 
 class Factory:
@@ -25,13 +25,15 @@ class Factory:
         fileName = Factory.createFileName(envType, numSplit, infStep, explorCoeff)
         descr = Factory.createDescription(envType, numSplit, infStep, explorCoeff)
         if envType == 'CartPole-v0':
-            policy = Policy_Base(explorCoeff, Factory.actionsSpaceSize_CartPole0)
+            policy = Policy_WithMemory(explorCoeff, Factory.actionsSpaceSize_CartPole0)
+            # policy = Policy_Base(explorCoeff, Factory.actionsSpaceSize_CartPole0)
             policy.setActionsSpace(Factory.actionsSpaceSize_CartPole0)
             converter = StateConverterInf(env.observation_space.low, env.observation_space.high, infStep, numSplit)
             retval = EnvironmentDataSet(envType, Factory.thresholdValue_CartPole0, env, policy, converter,
                                         Factory.numEpisodesToSolve_CartPole0, fileName, descr)
         elif envType == 'MountainCar-v0':
-            policy = Policy_Base(explorCoeff, Factory.actionsSpaceSize_MountainCar0)
+            policy = Policy_WithMemory(explorCoeff, Factory.actionsSpaceSize_MountainCar0)
+            # policy = Policy_Base(explorCoeff, Factory.actionsSpaceSize_MountainCar0)
             policy.setActionsSpace(Factory.actionsSpaceSize_MountainCar0)
             converter = StateConverterInf(env.observation_space.low, env.observation_space.high, infStep,
                                           numSplit)

@@ -1,10 +1,9 @@
 from math import inf
-from time import gmtime
 
 import datetime
 
 from EpisodeObserver import EpisodeObserver
-from Functions import ActionValueFunction
+from Functions import ActionValueFunction, ActionValueFunction_WithMemory
 
 
 class EnvironmentDataSet:
@@ -14,13 +13,13 @@ class EnvironmentDataSet:
         self.environment = environment
         self.policy = policy
         self.converter = stateConverter
-        self.avFunction = ActionValueFunction()
+        self.avFunction = ActionValueFunction_WithMemory()
         self.episodeObserver = EpisodeObserver()
         self.rewards = []
         self.rewardTotal = 0
         self.name = envName
         self.thresholdValue = envThresholdVal
-        self.whenFirstSolved = -1
+        # self.whenFirstSolved = -1
         self.numberOfEpisodesToAverage = numEpisodesToAverage
 
         dateTime = datetime.datetime.now().strftime("%Y_%B_%d_%I_%M")
@@ -68,8 +67,8 @@ class EnvironmentDataSet:
         res /= (self.rewards.__len__() - num)
         return res
 
-    def firstTimeSolved(self):
-        return self.whenFirstSolved
+    # def firstTimeSolved(self):
+    #     return self.whenFirstSolved
 
     def getNumberEpisodes(self):
         return self.rewards.__len__()
@@ -83,11 +82,15 @@ class EnvironmentDataSet:
     def makeStep(self):
         action = self.policy.makeStep(self.currentState)
         state, reward, done, info = self.environment.step(action)
-        self.episodeObserver.recordStep(self.currentState, action, reward)
+        if self.policy.hasStateMoreUntestedActions(self.converter.convert(state)):
+            rewardTmp = 100
+        else:
+            rewardTmp = reward
+        self.episodeObserver.recordStep(self.currentState, action, rewardTmp)
         self.currentState = self.converter.convert(state)
         self.rewardTotal += reward
-        if self.rewardTotal >= self.thresholdValue and self.whenFirstSolved == -1:
-            self.whenFirstSolved = self.rewards.__len__()
+        # if self.rewardTotal >= self.thresholdValue and self.whenFirstSolved == -1:
+        #     self.whenFirstSolved = self.rewards.__len__()
         return done
 
     def update(self):
@@ -97,4 +100,6 @@ class EnvironmentDataSet:
         self.avFunction = self.episodeObserver.updateStates(self.avFunction)
         self.policy.updatePolicy(self.avFunction.getImprovedPolicy())
         self.episodeObserver.reset()
+        av, ma = self.policy.analyzeReturns()
+        print("Policy with {} states, average return - {}, max return is {}".format(self.policy.getSize(), av, ma))
         return retval
