@@ -83,7 +83,7 @@ class EnvironmentDataSet:
         action = self.policy.makeStep(self.currentState)
         state, reward, done, info = self.environment.step(action)
         if self.policy.hasStateMoreUntestedActions(self.converter.convert(state)):
-            rewardTmp = 100
+            rewardTmp = 10
         else:
             rewardTmp = reward
         self.episodeObserver.recordStep(self.currentState, action, rewardTmp)

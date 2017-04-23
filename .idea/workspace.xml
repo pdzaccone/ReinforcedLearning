@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="60e31f0e-c15c-4b11-80d5-503b6ea213a1" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EnvironmentDataSet.py" afterPath="$PROJECT_DIR$/EnvironmentDataSet.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EpisodeObserver.py" afterPath="$PROJECT_DIR$/EpisodeObserver.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Factories.py" afterPath="$PROJECT_DIR$/Factories.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Functions.py" afterPath="$PROJECT_DIR$/Functions.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Misc.py" afterPath="$PROJECT_DIR$/Misc.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Policy.py" afterPath="$PROJECT_DIR$/Policy.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -35,7 +28,7 @@
         <entry file="file://$PROJECT_DIR$/EnvironmentDataSet.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="183">
-              <caret line="85" column="27" lean-forward="false" selection-start-line="85" selection-start-column="27" selection-end-line="85" selection-end-column="27" />
+              <caret line="85" column="26" lean-forward="false" selection-start-line="85" selection-start-column="26" selection-end-line="85" selection-end-column="26" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -124,7 +117,7 @@
         <entry file="file://$PROJECT_DIR$/Functions.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="505">
-              <caret line="70" column="25" lean-forward="true" selection-start-line="63" selection-start-column="0" selection-end-line="70" selection-end-column="25" />
+              <caret line="70" column="25" lean-forward="false" selection-start-line="63" selection-start-column="0" selection-end-line="70" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -883,7 +876,7 @@
     <entry file="file://$PROJECT_DIR$/Functions.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="505">
-          <caret line="70" column="25" lean-forward="true" selection-start-line="63" selection-start-column="0" selection-end-line="70" selection-end-column="25" />
+          <caret line="70" column="25" lean-forward="false" selection-start-line="63" selection-start-column="0" selection-end-line="70" selection-end-column="25" />
           <folding />
         </state>
       </provider>
@@ -960,7 +953,7 @@
     <entry file="file://$PROJECT_DIR$/EnvironmentDataSet.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="183">
-          <caret line="85" column="27" lean-forward="false" selection-start-line="85" selection-start-column="27" selection-end-line="85" selection-end-column="27" />
+          <caret line="85" column="26" lean-forward="false" selection-start-line="85" selection-start-column="26" selection-end-line="85" selection-end-column="26" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
