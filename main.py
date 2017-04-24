@@ -9,7 +9,7 @@ numSplit_CartPole0 = 12
 explorationCoeff_CartPole0 = 0.5
 
 stepInf_MountainCar0 = 0.5
-numSplit_MountainCar0 = 32
+numSplit_MountainCar0 = 16
 explorationCoeff_MountainCar0 = 1
 
 stepInf_LunarLander2 = 0.5
@@ -39,12 +39,14 @@ for environment in environments:
             done = environment.makeStep()
             if done:
                 rew = environment.update()
+                if t < 199:
+                    environment.informAboutPrematureFinish()
                 fo.write("{}\t{}\t{}\t".format(i_episode, rew, t))
                 for j in range(environment.getActionSpaceSize()):
                     stateData.append(environment.getNumKnownStates(j + 1))
                     fo.write("{}\t".format(environment.getNumKnownStates(j + 1)))
                 fo.write("\n")
-                if rew >= environment.getThresholdValue():
+                if rew >= environment.getThresholdValue() or environment.isSolvedNow():
                     print("Environment {}, episode {} is solved in {} steps, total reward is {}".format(
                         environment.getName(), i_episode, t + 1, rew))
                 else:

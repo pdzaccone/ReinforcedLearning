@@ -1,4 +1,5 @@
 import operator
+from enum import Enum
 from math import inf, floor
 from random import randrange
 
@@ -78,6 +79,12 @@ class ActionSorter_TopReturn:
     def getNumberOfActions(self):
         return self.actionsAll.__len__()
 
+    def getNumberOfVisits(self):
+        retval = 0
+        for action in self.actionsAll:
+            retval += self.actionsAll[action][0]
+        return retval
+
     def analyzeReturns(self):
         valAv = 0
         for action in self.actionsAll:
@@ -93,3 +100,8 @@ class ValueNumPair:
         average = (self.value * self.number + newVal.value * newVal.number) / (self.number + newVal.number)
         self.value = average
         self.number += newVal.number
+
+class RewardProcessingModes(Enum):
+    RPM_NO_CHANGE = 1
+    RPM_NEW_STATES_PLUS = 2
+    RPM_RARE_STATES_PLUS = 3

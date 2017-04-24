@@ -1,8 +1,10 @@
 import gym
 
-from Converters import StateConverterBase, StateConverterInf
-from Policy import Policy_Base, Policy_WithMemory
-from EnvironmentDataSet import EnvironmentDataSet
+from Converters import StateConverterInf
+from Misc import RewardProcessingModes
+from Policies import Policy_Base, Policy_WithMemory
+from EnvironmentDataSets import EnvironmentDataSet_Base, EnvironmentDataSet_2Stages
+
 
 class Factory:
     """"""
@@ -26,26 +28,25 @@ class Factory:
         descr = Factory.createDescription(envType, numSplit, infStep, explorCoeff)
         if envType == 'CartPole-v0':
             policy = Policy_WithMemory(explorCoeff, Factory.actionsSpaceSize_CartPole0)
-            # policy = Policy_Base(explorCoeff, Factory.actionsSpaceSize_CartPole0)
             policy.setActionsSpace(Factory.actionsSpaceSize_CartPole0)
             converter = StateConverterInf(env.observation_space.low, env.observation_space.high, infStep, numSplit)
-            retval = EnvironmentDataSet(envType, Factory.thresholdValue_CartPole0, env, policy, converter,
-                                        Factory.numEpisodesToSolve_CartPole0, fileName, descr)
+            retval = EnvironmentDataSet_Base(envType, Factory.thresholdValue_CartPole0, env, policy, converter,
+                                             Factory.numEpisodesToSolve_CartPole0, fileName, descr)
         elif envType == 'MountainCar-v0':
             policy = Policy_WithMemory(explorCoeff, Factory.actionsSpaceSize_MountainCar0)
-            # policy = Policy_Base(explorCoeff, Factory.actionsSpaceSize_MountainCar0)
             policy.setActionsSpace(Factory.actionsSpaceSize_MountainCar0)
             converter = StateConverterInf(env.observation_space.low, env.observation_space.high, infStep,
                                           numSplit)
-            retval = EnvironmentDataSet(envType, Factory.thresholdValue_MountainCar0, env, policy, converter,
-                                        Factory.numEpisodesToSolve_MountainCar0, fileName, descr)
+            retval = EnvironmentDataSet_2Stages(envType, Factory.thresholdValue_MountainCar0, env,
+                                                RewardProcessingModes.RPM_NEW_STATES_PLUS, policy, converter,
+                                                Factory.numEpisodesToSolve_MountainCar0, fileName, descr)
         elif envType == 'LunarLander-v2':
             policy = Policy_Base(explorCoeff, Factory.actionsSpaceSize_LunarLander2)
             policy.setActionsSpace(Factory.actionsSpaceSize_LunarLander2)
             converter = StateConverterInf(env.observation_space.low, env.observation_space.high, infStep,
                                           numSplit)
-            retval = EnvironmentDataSet(envType, Factory.thresholdValue_LunarLander2, env, policy, converter,
-                                        Factory.numEpisodesToSolve_LunarLander2, fileName, descr)
+            retval = EnvironmentDataSet_Base(envType, Factory.thresholdValue_LunarLander2, env, policy, converter,
+                                             Factory.numEpisodesToSolve_LunarLander2, fileName, descr)
         return retval
 
     @staticmethod

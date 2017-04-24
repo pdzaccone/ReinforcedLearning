@@ -223,3 +223,10 @@ class Policy_WithMemory:
             valMax = max(valMax, valMaxTmp)
         valAv /= numTotal
         return (valAv, valMax)
+
+    def getNumberOfVisits(self, state):
+        if self.actionsMap.__len__() == 0 or not state in self.actionsMap:
+            return 0
+        else:
+            actionPicker = self.actionsMap[state]
+            return actionPicker.getNumberOfVisits()
